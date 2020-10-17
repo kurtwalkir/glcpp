@@ -5,6 +5,6 @@ int main(int argc, char *argv[])
 {
 
 	Server *obj = new Server();
-	obj->init();
+	obj->run();
 	delete obj;
 }
