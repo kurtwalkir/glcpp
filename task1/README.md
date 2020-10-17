@@ -21,6 +21,6 @@ make -j8<br/>
 
 Default server ip: 127.0.0.1, port: 7828<br/>
 
-![Image alt](https://github.com/kurtwalkir/glcpp/tree/master/task1/screen/server.png)<br/>
-![Image alt](https://github.com/kurtwalkir/glcpp/tree/master/task1/screen/server.png)
+![Image alt](https://github.com/kurtwalkir/glcpp/blob/master/task1/screen/server.png)<br/>
+![Image alt](https://github.com/kurtwalkir/glcpp/blob/master/task1/screen/nc.png)
 
