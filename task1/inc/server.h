@@ -1,5 +1,4 @@
 #pragma once
-#include <thread>
 extern "C"
 {
    #include<sys/socket.h>
@@ -17,12 +16,11 @@ class Server
    socklen_t addr_len;
    bool runningLoader;
 
-   
 public:
 	Server();
    Server(unsigned short port);   
 	~Server();
-	void init(void);
+	void run(void);
    void connectionHandler(int socketFd);
    void loader(int socketFd);
 };
