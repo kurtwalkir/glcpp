@@ -2,19 +2,23 @@
 #include <iostream>
 #include <cstring>
 #include <unistd.h>
-#include <thread>
 #include <chrono>
 #include <fstream>
+#include <thread>
 
  Server::Server()
  {
 
  }
 
-  Server::~Server()
-  {
+Server::Server(unsigned short port)
+{
+  this->port = port;
+}
+Server::~Server()
+{
 
-  }
+}
 
  void Server::init()
  {
@@ -63,11 +67,14 @@
    while( (read_size = recv(socketFd, client_message, 255, 0)) > 0 )
    {
       client_message[read_size-1] = '\0';
-	  char cmd[255];
-	  sprintf(cmd,"find -name %s > result.txt",client_message);
+	    char cmd[255];
+	    sprintf(cmd,"find -name %s > result.txt",client_message);
+
 
 	  std::thread t(&Server::loader,this,socketFd);
-      //t.join();
+    runningLoader = true;
+
+
 	  if(!system(cmd))
 	  {
 	  	std::cout<<"Start search!"<<std::endl;
@@ -77,27 +84,29 @@
     	{
         	while (getline(in, line))
         	{
-            	std::cout << line << std::endl;
             	write(socketFd,line.c_str(), line.length());
         	}	
     	}
     	in.close();
 
-		client_message[read_size] = '\0';
-		memset(client_message, 0, 255); 
+		  client_message[read_size] = '\0';
+		  memset(client_message, 0, 255); 
 	   }
 	   else
 	   {
 	   		std::cout<<"Search error!"<<std::endl;
-			write(socketFd,"failure",8);
+			  write(socketFd,"failure",8);
 	   }
+
+      runningLoader = false;
+      if (t.joinable())t.join();
    }
 
 }
 
    void Server::loader(int socketFd)
    {
-   		while(1)
+   		while(runningLoader)
    		{
    			write(socketFd,"Processing\n", strlen("Processing\n"));
    			std::this_thread::sleep_for (std::chrono::seconds(1));
