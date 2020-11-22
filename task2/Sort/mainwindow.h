@@ -25,13 +25,16 @@ protected:
 private:
     Ui::MainWindow *ui;
     BubbleSort<int> *bSort;
-    int higthValue[10];
+    InsertionSort<int> *iSort;
+    SelectionSort<int> *sSort;
+
+    int *arrayPtr;
+    int len;
 
 private slots:
     void update(void);
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
-
     void on_pushButton_3_clicked();
 };
 #endif // MAINWINDOW_H

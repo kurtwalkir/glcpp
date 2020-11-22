@@ -26,7 +26,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Task2</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
@@ -68,27 +68,27 @@
      <number>6</number>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>240</y>
-      <width>341</width>
-      <height>70</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_3">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>240</y>
-      <width>89</width>
-      <height>71</height>
+      <x>10</x>
+      <y>280</y>
+      <width>331</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Enter</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>230</y>
+      <width>331</width>
+      <height>41</height>
+     </rect>
     </property>
    </widget>
   </widget>

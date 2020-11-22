@@ -45,7 +45,7 @@ class SelectionSort
     T *array;
     long long len;
     bool isFinished;
-    long long i,j;
+    long long i,j,min;
 
 public:
     SelectionSort();

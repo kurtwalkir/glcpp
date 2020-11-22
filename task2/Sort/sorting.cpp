@@ -57,6 +57,12 @@ void BubbleSort<T>::sort()
     }
 }
 
+template<typename T>
+bool BubbleSort<T>::sorted()
+{
+    return isFinished;
+}
+
 /*-----------Insert sort-----------*/
 template<typename T>
 InsertionSort<T>::InsertionSort()
@@ -83,7 +89,23 @@ InsertionSort<T>::~InsertionSort()
 template<typename T>
 void InsertionSort<T>::step()
 {
-
+    if (isFinished)
+        return;
+    if (i < len)
+    {
+        if (j > 0 && array[j-1] > array[j])
+        {
+            std::swap(array[j], array[j-1]);
+            j--;
+        }
+        else
+        {
+            i++;
+            j = i;
+        }
+    }
+    else
+        isFinished = true;
 }
 
 template<typename T>
@@ -120,7 +142,20 @@ SelectionSort<T>::~SelectionSort()
 template<typename T>
 void SelectionSort<T>::step()
 {
-
+    if (isFinished)
+        return;
+    if (array[j] < array[min])
+        min = j;
+    j++;
+    if (j >= len)
+    {
+        std::swap(array[i], array[min]);
+        i++;
+        min = i;
+        j = i;
+    }
+    if (i >= len - 1)
+        isFinished = true;
 }
 
 template<typename T>
