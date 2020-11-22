@@ -15,15 +15,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox->addItem("Select sort");
     ui->comboBox->addItem("Merge sort");
     ui->comboBox->addItem("Shell sort");
-
-   // bSort = new BubbleSort<int>(arrayPtr, 10);
-//    iSort = new InsertionSort<int>(arrayPtr, 10);
-//    sSort = new SelectionSort<int>(arrayPtr, 10);
-
     arrayPtr = nullptr;
     len = 0;
+    ui->pushButton->setDisabled(true);
+    ui->pushButton_2->setDisabled(true);
 
-    tm.setInterval(100);
+    tm.setInterval(500);
     connect(&tm, SIGNAL(timeout()), this, SLOT(update()));
 
 }
@@ -34,7 +31,6 @@ void MainWindow::paintEvent(QPaintEvent *event)
 
     if ((len > 0) && (arrayPtr))
     {
-        qDebug()<<"Len:"<<len;
         QPainter painter(this);
         painter.setBrush(QColor::fromRgb(205, 235, 99));
         QRect rect(0, 0, width(), height()/2);
@@ -45,10 +41,10 @@ void MainWindow::paintEvent(QPaintEvent *event)
         for (int i = 0; i < len; i++)
         {
             if (i == 1)painter.setBrush(QColor::fromRgb(99, 189, 235));
-            QRect rect(40*i, height()/2, 35, -arrayPtr[i]);
+            QRect rect(40*i, height()/2, 35, -arrayPtr[i]*10);
             painter.fillRect(rect, painter.brush());
             painter.drawRect(rect);
-            painter.drawText(40*i+5, height()/2-10, QString::number((arrayPtr[i]- 40)/10));
+            painter.drawText(40*i+5, height()/2-10, QString::number(arrayPtr[i]));
 
         }
     }
@@ -63,16 +59,39 @@ void MainWindow::update(void)
             delete bSort;
             bSort = nullptr;
             tm.stop();
+            ui->pushButton->setDisabled(true);
+            ui->pushButton_2->setDisabled(true);
+            ui->pushButton_3->setDisabled(false);
         } else {
             bSort->step();
         }
 
     } else if (ui->comboBox->currentText()=="Insertions sort")
     {
-        iSort->step();
+        if ((iSort->sorted()) && (iSort != nullptr))
+        {
+            delete iSort;
+            iSort = nullptr;
+            tm.stop();
+            ui->pushButton->setDisabled(true);
+            ui->pushButton_2->setDisabled(true);
+            ui->pushButton_3->setDisabled(false);
+        } else {
+            iSort->step();
+        }
     } else if (ui->comboBox->currentText()=="Select sort")
     {
-        sSort->step();
+        if ((sSort->sorted()) && (sSort != nullptr))
+        {
+            delete sSort;
+            sSort = nullptr;
+            tm.stop();
+            ui->pushButton->setDisabled(true);
+            ui->pushButton_2->setDisabled(true);
+            ui->pushButton_3->setDisabled(false);
+        } else {
+            sSort->step();
+        }
     }
     repaint();
 }
@@ -87,13 +106,28 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    bSort = new BubbleSort<int>(arrayPtr, len);
+    if (ui->comboBox->currentText()=="Bubble sort")
+    {
+        bSort = new BubbleSort<int>(arrayPtr, len);
+    } else if (ui->comboBox->currentText()=="Insertions sort")
+    {
+        iSort = new InsertionSort<int>(arrayPtr, len);
+    } else if (ui->comboBox->currentText()=="Select sort")
+    {
+        sSort = new SelectionSort<int>(arrayPtr, len);
+    }
     tm.start();
+    ui->pushButton->setDisabled(true);
+    ui->pushButton_2->setDisabled(false);
+    ui->pushButton_3->setDisabled(true);
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
     tm.stop();
+    ui->pushButton->setDisabled(true);
+    ui->pushButton_2->setDisabled(true);
+    ui->pushButton_3->setDisabled(false);
 }
 
 void MainWindow::on_pushButton_3_clicked()
@@ -108,15 +142,21 @@ void MainWindow::on_pushButton_3_clicked()
     len = list.size();
     arrayPtr = new int [len];
 
-
     int i = 0;
      foreach(QString num, list)
      {
-          arrayPtr[i] = 40+num.toInt()*10;
+          arrayPtr[i] = num.toInt();
           i++;
      }
-
+     ui->pushButton->setDisabled(false);
+     ui->pushButton_2->setDisabled(false);
+     ui->pushButton_3->setDisabled(true);
      repaint();
 }
 
 
+
+void MainWindow::on_horizontalSlider_actionTriggered(int action)
+{
+    tm.setInterval(ui->horizontalSlider->value()*100);
+}

@@ -116,6 +116,12 @@ void InsertionSort<T>::sort()
             std::swap(this->array[j-1], this->array[j]);
 }
 
+template<typename T>
+bool InsertionSort<T>::sorted()
+{
+    return isFinished;
+}
+
 /*-----------Selection sort-----------*/
 template<typename T>
 SelectionSort<T>::SelectionSort()
@@ -171,4 +177,10 @@ void SelectionSort<T>::sort()
         }
         std::swap(this->array[i], this->array[min]);
     }
+}
+
+template<typename T>
+bool SelectionSort<T>::sorted()
+{
+    return isFinished;
 }
