@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "sorts.h"
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -9,14 +8,19 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    ui->comboBox->addItem("Bubble sort");
+    ui->comboBox->addItem("Quick sort");
+    ui->comboBox->addItem("Insertions sort");
+    ui->comboBox->addItem("Merge sort");
+    ui->comboBox->addItem("Shell sort");
+
+
     for (int i = 0; i < 10; i++)
             higthValue[i] = 40+i*10;
 
-    shuffle_array(higthValue, sizeof(higthValue)/sizeof(int));
-
     bSort = new BubbleSort<int>(higthValue, 10);
 
-    tm.setInterval(1000);
+    tm.setInterval(100);
     connect(&tm, SIGNAL(timeout()), this, SLOT(update()));
 
 }
@@ -38,7 +42,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
         QRect rect(40*i, height()/2, 35, -higthValue[i]);
         painter.fillRect(rect, painter.brush());
         painter.drawRect(rect);
-        painter.drawText(40*i+5, height()/2-10, QString::number(higthValue[i]));
+        painter.drawText(40*i+5, height()/2-10, QString::number((higthValue[i]- 40)/10));
 
     }
 }
@@ -65,4 +69,21 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     tm.stop();
+}
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    QString str = ui->textEdit->toPlainText().trimmed();
+    if(str.isEmpty()) return;
+
+    QStringList list = str.split(" ",QString::SkipEmptyParts);
+    int i = 0;
+     foreach(QString num, list)
+     {
+          higthValue[i] = 40+num.toInt()*10;
+          i++;
+     }
+     repaint();
+
+
 }

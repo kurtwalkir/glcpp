@@ -22,8 +22,7 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
-    sorting.h \
-    sorts.h
+    sorting.h
 
 FORMS += \
     mainwindow.ui
