@@ -1,5 +1,5 @@
 
-![Image alt](https://github.com/kurtwalkir/glcpp/blob/master/task2/app_screen.png)<br/>
+![Image alt](https://github.com/kurtwalkir/glcpp/blob/master/task2/app_scr.png)<br/>
 
 Implement Animated sorting application. </br>
 
