@@ -160,3 +160,15 @@ void MainWindow::on_horizontalSlider_actionTriggered(int action)
 {
     tm.setInterval(ui->horizontalSlider->value()*100);
 }
+
+void MainWindow::on_pushButton_4_clicked()
+{
+
+//    srand(time(0));
+//    for (long long i = 0; i < len; i++)
+//    {
+//        uint64_t rand_index_1 = static_cast<uint64_t>(rand()) % len;
+//        uint64_t rand_index_2 = static_cast<uint64_t>(rand()) % len;
+//        swaP(array[rand_index_1], array[rand_index_2]);
+//    }
+}

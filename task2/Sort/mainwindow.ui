@@ -94,8 +94,8 @@
    <widget class="QSlider" name="horizontalSlider">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>280</y>
+      <x>380</x>
+      <y>320</y>
       <width>160</width>
       <height>16</height>
      </rect>
@@ -116,14 +116,27 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>410</x>
-      <y>240</y>
+      <x>420</x>
+      <y>290</y>
       <width>81</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
      <string>Speed:</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>230</y>
+      <width>101</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Generate array</string>
     </property>
    </widget>
   </widget>
